@@ -1,4 +1,4 @@
-# C
+# Chess Game
 서울과학기술대학교 객체지향 프로그래밍 체스게임 프로젝트  
 (C++)  
 하루만에 후다닥 만든 프로젝트..  
@@ -14,7 +14,7 @@
 8. 게임 결과 확인: 게임의 승패를 화면에 출력. 승패가 나온 경우 말을 움직일 수 없어야 함  
 
 ![image](https://github.com/foodinsect/C/assets/36304709/17703b38-441b-4f6a-a38e-f9c21cef1532)
-
+[구현 영상](https://youtu.be/SfbcNh9sHxw)
 
 <ChessGame 클래스>
 1.	paint()  
