@@ -1,68 +1,94 @@
-# Chess Game
-서울과학기술대학교 객체지향 프로그래밍 체스게임 프로젝트  
-(C++)  
-하루만에 후다닥 만든 프로젝트..  
-   
-[구현 영상](https://youtu.be/SfbcNh9sHxw)   
+# ♟️ Chess Game
 
-   
-기능 동작  
-1. 초기 말의 배치: 게임 시작 시 말의 위치가 표준적인 배치  
-2. 공격권의 전달: 공격권이 교대로 이동되어야 하며, 현재 공격이 어느 쪽에 있는지 확인이 가능하여야 한다  
-3. 말의 선택: 말의 선택 방식을 정하고 말의 선택시 말이 선택된것을 확인할 수 있어야 한다  
-4. 말의 이동 가능 위치 표현: 선택한 말이 이동이 가능한 위치를 보여 주어야 한다  
-5. 말의 이동 결정: 이동 가능한 위치에서 하나를 선택할 수 있도록하고 이에 따른 이동을 수행하여야 한다  
-6. 말의 이동에 따른 변화: 말의 이동에 따라 변화된 결과를 화면에 표시하여야 한다. 상대방을 먹은 경우 이를 반영  
-7. 장군 또는 체크: 장군 또는 체크 상황이 되어있을 때, 이를 화면이나 소리로 표시하여야 한다.  
-8. 게임 결과 확인: 게임의 승패를 화면에 출력. 승패가 나온 경우 말을 움직일 수 없어야 함  
+This is a Chess Game project developed as part of the Object-Oriented Programming course at Seoul National University of Science and Technology (SeoulTech). The project was quickly put together in a day using C++.
 
-![image](https://github.com/foodinsect/C/assets/36304709/17703b38-441b-4f6a-a38e-f9c21cef1532)
+## 🎥 Implementation Video
+<a href="https://youtu.be/SfbcNh9sHxw"><img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white"/></a>  
 
-<ChessGame 클래스>
-1.	paint()  
-    부모 클래스인 ChessBoard의 paint 메소드를 호출하여 기본 체스판을 그립니다.  
-    현재 선택된 말과 가능한 이동 위치를 시각적으로 강조합니다.  
-    게임의 현재 상태(진행 중, 체크, 승리 등)를 화면에 표시합니다.  
-2.	mouseDown(int x, int y)  
-    마우스 클릭 이벤트를 처리합니다. 클릭된 위치에 따라 말을 선택하거나 이동합니다.  
-    선택된 말이 있으면 이동 가능한 위치를 계산하고, 가능하다면 말을 이동시킵니다.  
-3.	switchPlayer()  
-    현재 플레이어를 변경합니다. 턴이 끝날 때 호출됩니다.  
-4.	calculatePossibleMoves(int x, int y)  
-    선택된 말에 대해 이동 가능한 모든 위치를 계산합니다.  
-5.	movePiece(const std::pair<int, int>& from, const std::pair<int, int>& to)  
-    말을 한 위치에서 다른 위치로 이동합니다. 이동 규칙을 확인하고 게임 상태를 업데이트합니다.  
-6.	isValidMove(...)  
-    특정 말의 이동이 유효한지 확인합니다. 이는 Piece 클래스의 isValidMove 메소드를 통해 구현됩니다.  
-7.	canSelect(int row, int col)  
-    현재 플레이어가 선택한 위치의 말을 이동할 수 있는지 확인합니다.  
-8.	findKingPosition(Player currentPlayer)  
-    현재 플레이어의 킹 말 위치를 찾습니다.  
-9.	isCheck()  
-    현재 플레이어의 킹이 체크 상태인지 확인합니다.  
-  
-<ChessBoard 클래스>  
-1.	drawChessBoard()  
-    체스판의 각 타일을 그립니다. 타일의 색상은 위치에 따라 결정됩니다.  
-2.	initializeBoard()  
-    체스판 시작 시 각 말을 초기 위치에 배치합니다.  
-3.	drawPieces()  
-    체스판 위에 각 말을 그립니다. 각 말의 유형과 위치에 따라 다르게 그려집니다.  
-4.	drawText(const TCHAR text, int length, int x, int y)*:  주어진 위치에 텍스트를 그립니다.  
-5.	drawPiece(const Piece piece, int x, int y)*  
-    주어진 위치에 특정 말을 그립니다.  
-  	
-<Piece 클래스 및 파생 클래스>  
-  각 체스 말의 이동 규칙은 해당 말의 isValidMove 메소드에 구현되어 있습니다.  
-1.	Pawn  
-    폰은 첫 이동에서만 2칸 이동할 수 있고, 그 외에는 1칸씩 전진합니다. 대각선으로는 상대 말을 잡을 때만 이동할 수 있습니다.  
-2.	Knight  
-    나이트는 'L' 형태로 이동합니다 (2칸 직진 후 1칸 수직 이동 또는 1칸 직진 후 2칸 수직 이동).  
-3.	Bishop  
-    비숍은 대각선으로만 이동할 수 있으며, 이동 경로에 다른 말이 없어야 합니다.  
-4.	Rook  
-    룩은 수직 또는 수평으로만 이동할 수 있으며, 이동 경로에 다른 말이 없어야 합니다.  
-5.	Queen  
-    퀸은 수직, 수평, 대각선 어느 방향으로도 이동할 수 있습니다.  
-6.	King  
-    킹은 주변 8칸 어느 방향으로도 한 칸씩만 이동할 수 있습니다.  
+## 🛠️ Features
+1. **Initial Piece Placement**: Pieces are placed in standard positions at the start of the game.
+2. **Turn Management**: Turns alternate between players, and the current turn is indicated.
+3. **Piece Selection**: Players can select pieces, and the selection is visually indicated.
+4. **Valid Moves Highlighting**: Shows all possible moves for the selected piece.
+5. **Piece Movement**: Allows players to move pieces to valid positions.
+6. **Board Update**: The board updates to reflect moves, including capturing opponent pieces.
+7. **Check/Checkmate Indication**: Visual and/or audio indication of check or checkmate situations.
+8. **Game Result Display**: Displays the game's outcome, and disables further moves once a winner is determined.
+
+![Chess Game Screenshot](https://github.com/foodinsect/C/assets/36304709/17703b38-441b-4f6a-a38e-f9c21cef1532)
+
+## 🧩 Class Descriptions
+
+### `ChessGame` Class
+1. **paint()**
+   - Calls the parent class `ChessBoard`'s paint method to draw the base chessboard.
+   - Highlights the currently selected piece and possible move locations.
+   - Displays the current game state (ongoing, check, win, etc.).
+
+2. **mouseDown(int x, int y)**
+   - Handles mouse click events to select or move pieces based on the clicked location.
+   - Calculates possible moves for the selected piece and performs the move if valid.
+
+3. **switchPlayer()**
+   - Changes the current player, called at the end of a turn.
+
+4. **calculatePossibleMoves(int x, int y)**
+   - Computes all possible moves for the selected piece.
+
+5. **movePiece(const std::pair<int, int>& from, const std::pair<int, int>& to)**
+   - Moves a piece from one location to another, checks move validity, and updates the game state.
+
+6. **isValidMove(...)**
+   - Validates whether a move is legal for a given piece, implemented through the `Piece` class's `isValidMove` method.
+
+7. **canSelect(int row, int col)**
+   - Checks if the current player can select a piece at the given position.
+
+8. **findKingPosition(Player currentPlayer)**
+   - Finds the position of the current player's king.
+
+9. **isCheck()**
+   - Determines if the current player's king is in check.
+
+### `ChessBoard` Class
+1. **drawChessBoard()**
+   - Draws each tile of the chessboard, with colors determined by position.
+
+2. **initializeBoard()**
+   - Places pieces in their initial positions at the start of the game.
+
+3. **drawPieces()**
+   - Renders each piece on the chessboard according to its type and position.
+
+4. **drawText(const TCHAR text, int length, int x, int y)**
+   - Draws text at the specified position.
+
+5. **drawPiece(const Piece piece, int x, int y)**
+   - Draws a specific piece at the given position.
+
+### `Piece` Class and Subclasses
+Each chess piece's movement rules are implemented in the `isValidMove` method of its respective class.
+
+1. **Pawn**
+   - Moves forward one square, or two squares from its initial position. Captures diagonally.
+
+2. **Knight**
+   - Moves in an 'L' shape: two squares in one direction and then one square perpendicular.
+
+3. **Bishop**
+   - Moves diagonally any number of squares, without jumping over other pieces.
+
+4. **Rook**
+   - Moves vertically or horizontally any number of squares, without jumping over other pieces.
+
+5. **Queen**
+   - Moves vertically, horizontally, or diagonally any number of squares.
+
+6. **King**
+   - Moves one square in any direction.
+
+## 📫 Contact
+- <a href="https://mail.google.com/mail/?view=cm&fs=1&to=opqrs0422@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"/></a>
+
+---
+
